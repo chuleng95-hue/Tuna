@@ -1,0 +1,6 @@
+{
+  "name": "Two Truths and a Lie",
+  "description": "A real-time classroom icebreaker game with live student voting and host controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

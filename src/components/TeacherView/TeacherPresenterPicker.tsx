@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserCheck, Shuffle, ArrowRight, CheckCircle2, Clock } from 'lucide-react';
+import { UserCheck, Shuffle, ArrowRight, CheckCircle2, Clock, PartyPopper } from 'lucide-react';
 import { PublicGameRoom } from '../../types';
 import { soundEffects } from '../../utils/audio';
 
@@ -27,12 +27,12 @@ export const TeacherPresenterPicker: React.FC<Props> = ({ room, onSelectPresente
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header Banner */}
-      <div className="bg-white rounded-[32px] p-6 border-4 border-[#6C5CE7] shadow-[8px_8px_0px_0px_#6C5CE7] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white rounded-[32px] p-6 border-4 border-grape shadow-[8px_8px_0_0_var(--color-grape)] flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-black text-[#2D3436] tracking-tight">
+          <h2 className="text-2xl font-black text-ink tracking-tight">
             Select Next Student Round
           </h2>
-          <p className="text-xs font-bold text-[#636E72] mt-1">
+          <p className="text-xs font-bold text-muted mt-1">
             Pick a student to project their 2 Truths & 1 Lie to the class!
           </p>
         </div>
@@ -40,7 +40,7 @@ export const TeacherPresenterPicker: React.FC<Props> = ({ room, onSelectPresente
         <button
           onClick={handleRandomPick}
           disabled={remainingStudents.length === 0}
-          className="w-full sm:w-auto px-6 py-3.5 bg-[#A29BFE] hover:bg-[#8c83fc] disabled:opacity-50 text-white font-black rounded-2xl border-2 border-[#2D3436] shadow-[4px_4px_0px_0px_#2D3436] text-sm flex items-center justify-center gap-2 transition-all shrink-0 cursor-pointer"
+          className="w-full sm:w-auto px-6 py-3.5 bg-lilac hover:bg-aqua disabled:opacity-50 text-ink font-black rounded-2xl border-2 border-ink shadow-[4px_4px_0_0_var(--color-ink)] text-sm flex items-center justify-center gap-2 transition-all shrink-0"
         >
           <Shuffle className="w-4 h-4" />
           <span>Auto-Pick Random Student</span>
@@ -48,23 +48,23 @@ export const TeacherPresenterPicker: React.FC<Props> = ({ room, onSelectPresente
       </div>
 
       {/* Grid of Remaining Students */}
-      <div className="bg-white rounded-[32px] p-6 border-4 border-[#B2BEC3] shadow-[8px_8px_0px_0px_#B2BEC3] space-y-4">
-        <div className="flex items-center justify-between border-b-2 border-[#F1F2F6] pb-3">
-          <h3 className="text-sm font-black text-[#2D3436] uppercase tracking-wider flex items-center gap-2">
-            <Clock className="w-4 h-4 text-[#E17055]" /> Waiting For Turn ({remainingStudents.length})
+      <div className="bg-white rounded-[32px] p-6 border-4 border-mist shadow-[8px_8px_0_0_var(--color-mist)] space-y-4">
+        <div className="flex items-center justify-between border-b-2 border-cloud pb-3">
+          <h3 className="text-sm font-black text-ink uppercase tracking-wider flex items-center gap-2">
+            <Clock className="w-4 h-4 text-coral" /> Waiting For Turn ({remainingStudents.length})
           </h3>
-          <span className="text-xs font-black text-[#636E72]">
+          <span className="text-xs font-black text-muted">
             {completedStudents.length} of {readyStudents.length} Rounds Done
           </span>
         </div>
 
         {remainingStudents.length === 0 ? (
-          <div className="text-center py-12 px-4 bg-[#81ECEC]/20 border-4 border-[#00CEC9] rounded-2xl">
-            <div className="w-16 h-16 bg-[#81ECEC] border-2 border-[#00CEC9] rounded-full flex items-center justify-center text-[#2D3436] text-3xl mx-auto mb-3 shadow-[3px_3px_0px_0px_#00CEC9]">
-              🎉
+          <div className="text-center py-12 px-4 bg-aqua/20 border-4 border-teal rounded-2xl">
+            <div className="w-16 h-16 bg-aqua border-2 border-teal rounded-full flex items-center justify-center text-ink mx-auto mb-3 shadow-[3px_3px_0_0_var(--color-teal)]">
+              <PartyPopper className="w-7 h-7" aria-hidden="true" />
             </div>
-            <h4 className="text-lg font-black text-[#2D3436]">All Student Statements Completed!</h4>
-            <p className="text-xs font-bold text-[#636E72] mt-1">
+            <h4 className="text-lg font-black text-ink">All Student Statements Completed!</h4>
+            <p className="text-xs font-bold text-muted mt-1">
               Every student has presented their statements! Check the final leaderboard.
             </p>
           </div>
@@ -77,23 +77,23 @@ export const TeacherPresenterPicker: React.FC<Props> = ({ room, onSelectPresente
                   soundEffects.playClick();
                   onSelectPresenter(student.id);
                 }}
-                className="group p-4 bg-[#FFF9F0] hover:bg-[#FFD93D]/30 border-2 border-[#2D3436] rounded-2xl text-left transition-all duration-150 flex items-center justify-between shadow-[3px_3px_0px_0px_#2D3436] cursor-pointer"
+                className="group p-4 bg-cream hover:bg-sun/30 border-2 border-ink rounded-2xl text-left transition-all duration-150 flex items-center justify-between shadow-[3px_3px_0_0_var(--color-ink)]"
               >
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-10 h-10 rounded-xl bg-[#6C5CE7] text-white border-2 border-[#2D3436] font-black text-base flex items-center justify-center shrink-0 transition-colors shadow-[2px_2px_0px_0px_#2D3436]">
+                  <div className="w-10 h-10 rounded-xl bg-grape text-white border-2 border-ink font-black text-base flex items-center justify-center shrink-0 transition-colors shadow-[2px_2px_0_0_var(--color-ink)]">
                     {student.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="truncate">
-                    <span className="block font-black text-[#2D3436] text-sm truncate">
+                    <span className="block font-black text-ink text-sm truncate">
                       {student.name}
                     </span>
-                    <span className="block text-[10px] font-bold text-[#636E72]">
+                    <span className="block text-[10px] font-bold text-muted">
                       Score: {student.score} pts
                     </span>
                   </div>
                 </div>
 
-                <div className="w-8 h-8 rounded-xl bg-white border-2 border-[#2D3436] text-[#2D3436] flex items-center justify-center transition-all shrink-0 shadow-[2px_2px_0px_0px_#2D3436]">
+                <div className="w-8 h-8 rounded-xl bg-white border-2 border-ink text-ink flex items-center justify-center transition-all shrink-0 shadow-[2px_2px_0_0_var(--color-ink)]">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </button>
@@ -104,19 +104,19 @@ export const TeacherPresenterPicker: React.FC<Props> = ({ room, onSelectPresente
 
       {/* Completed Students List */}
       {completedStudents.length > 0 && (
-        <div className="bg-white rounded-[32px] p-6 border-4 border-[#B2BEC3] space-y-3 shadow-[6px_6px_0px_0px_#B2BEC3]">
-          <h3 className="text-xs font-black text-[#2D3436] uppercase tracking-wider flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#00B894]" /> Completed Turns ({completedStudents.length})
+        <div className="bg-white rounded-[32px] p-6 border-4 border-mist space-y-3 shadow-[6px_6px_0_0_var(--color-mist)]">
+          <h3 className="text-xs font-black text-ink uppercase tracking-wider flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-mint-deep" /> Completed Turns ({completedStudents.length})
           </h3>
           <div className="flex flex-wrap gap-2">
             {completedStudents.map((student) => (
               <div
                 key={student.id}
-                className="px-3.5 py-1.5 bg-[#81ECEC]/20 border-2 border-[#00CEC9] rounded-xl text-xs font-black text-[#2D3436] flex items-center gap-1.5"
+                className="px-3.5 py-1.5 bg-aqua/20 border-2 border-teal rounded-xl text-xs font-black text-ink flex items-center gap-1.5"
               >
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00B894] border border-[#2D3436]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-mint border border-ink" />
                 <span>{student.name}</span>
-                <span className="text-[10px] text-[#636E72]">({student.score} pts)</span>
+                <span className="text-[10px] text-muted">({student.score} pts)</span>
               </div>
             ))}
           </div>

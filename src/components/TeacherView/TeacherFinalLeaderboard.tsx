@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Award, RefreshCw, Sparkles, Star } from 'lucide-react';
+import { Trophy, Award, RefreshCw, Sparkles, Star, Medal, Crown } from 'lucide-react';
 import { PublicGameRoom } from '../../types';
 import { soundEffects } from '../../utils/audio';
 
@@ -29,14 +29,12 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in zoom-in-95 duration-300">
       {/* Title Header */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FFD93D] text-[#2D3436] border-2 border-[#2D3436] rounded-full text-xs font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_#2D3436]">
-          <Trophy className="w-4 h-4 text-[#E17055]" /> Game Complete!
-        </div>
-        <h2 className="text-4xl md:text-6xl font-black text-[#2D3436] tracking-tight">
-          Class Champions 🏆
+        <h2 className="text-4xl md:text-6xl font-extrabold text-ink tracking-[-0.03em] inline-flex items-center gap-3">
+          Class Champions
+          <Trophy className="w-9 h-9 md:w-12 md:h-12 text-coral" aria-hidden="true" />
         </h2>
-        <p className="text-sm font-black text-[#636E72]">
-          Congratulations to everyone for sharing their 2 Truths & 1 Lie!
+        <p className="text-sm md:text-base font-bold text-muted">
+          Game complete! Congratulations to everyone for sharing their 2 Truths & 1 Lie!
         </p>
       </div>
 
@@ -47,16 +45,16 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
           <div className="flex flex-col items-center">
             {silver && (
               <div className="text-center space-y-1 mb-2 animate-in slide-in-from-bottom duration-300">
-                <span className="text-3xl">🥈</span>
-                <span className="block font-black text-[#2D3436] text-sm md:text-base max-w-[100px] md:max-w-[140px] truncate">
+                <Medal className="w-8 h-8 mx-auto text-muted" aria-label="Second place" />
+                <span className="block font-black text-ink text-sm md:text-base max-w-[100px] md:max-w-[140px] truncate">
                   {silver.name}
                 </span>
-                <span className="block text-xs font-mono font-black text-[#636E72]">
+                <span className="block text-xs font-mono font-black text-muted">
                   {silver.score} pts
                 </span>
               </div>
             )}
-            <div className="w-full bg-[#B2BEC3] border-4 border-[#2D3436] rounded-t-3xl h-36 md:h-44 flex items-center justify-center text-[#2D3436] font-black text-2xl md:text-3xl shadow-[6px_6px_0px_0px_#2D3436]">
+            <div className="w-full bg-mist border-4 border-ink rounded-t-3xl h-36 md:h-44 flex items-center justify-center text-ink font-black text-2xl md:text-3xl shadow-[6px_6px_0_0_var(--color-ink)]">
               2
             </div>
           </div>
@@ -65,17 +63,17 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
           <div className="flex flex-col items-center">
             {gold && (
               <div className="text-center space-y-1 mb-2 animate-in slide-in-from-bottom duration-500">
-                <span className="text-4xl md:text-5xl animate-bounce">👑</span>
-                <span className="block font-black text-[#2D3436] text-base md:text-xl max-w-[120px] md:max-w-[160px] truncate">
+                <Crown className="w-10 h-10 md:w-12 md:h-12 mx-auto text-coral fill-sun animate-float" aria-label="First place" />
+                <span className="block font-black text-ink text-base md:text-xl max-w-[120px] md:max-w-[160px] truncate">
                   {gold.name}
                 </span>
-                <span className="block text-xs md:text-sm font-mono font-black text-[#E17055]">
+                <span className="block text-xs md:text-sm font-mono font-black text-cherry">
                   {gold.score} pts
                 </span>
               </div>
             )}
-            <div className="w-full bg-[#FFD93D] border-4 border-[#2D3436] rounded-t-3xl h-48 md:h-60 flex items-center justify-center text-[#2D3436] font-black text-3xl md:text-5xl shadow-[8px_8px_0px_0px_#2D3436] relative overflow-hidden">
-              <Sparkles className="w-8 h-8 text-[#E17055] absolute top-2 right-2 animate-pulse" />
+            <div className="w-full bg-sun border-4 border-ink rounded-t-3xl h-48 md:h-60 flex items-center justify-center text-ink font-black text-3xl md:text-5xl shadow-[8px_8px_0_0_var(--color-ink)] relative overflow-hidden">
+              <Sparkles className="w-8 h-8 text-coral absolute top-2 right-2 animate-pulse" />
               1
             </div>
           </div>
@@ -84,16 +82,16 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
           <div className="flex flex-col items-center">
             {bronze && (
               <div className="text-center space-y-1 mb-2 animate-in slide-in-from-bottom duration-300">
-                <span className="text-3xl">🥉</span>
-                <span className="block font-black text-[#2D3436] text-sm md:text-base max-w-[100px] md:max-w-[140px] truncate">
+                <Medal className="w-8 h-8 mx-auto text-coral" aria-label="Third place" />
+                <span className="block font-black text-ink text-sm md:text-base max-w-[100px] md:max-w-[140px] truncate">
                   {bronze.name}
                 </span>
-                <span className="block text-xs font-mono font-black text-[#636E72]">
+                <span className="block text-xs font-mono font-black text-muted">
                   {bronze.score} pts
                 </span>
               </div>
             )}
-            <div className="w-full bg-[#E17055] border-4 border-[#2D3436] rounded-t-3xl h-28 md:h-36 flex items-center justify-center text-white font-black text-2xl md:text-3xl shadow-[6px_6px_0px_0px_#2D3436]">
+            <div className="w-full bg-coral border-4 border-ink rounded-t-3xl h-28 md:h-36 flex items-center justify-center text-ink font-black text-2xl md:text-3xl shadow-[6px_6px_0_0_var(--color-ink)]">
               3
             </div>
           </div>
@@ -101,8 +99,8 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
       )}
 
       {/* Full Leaderboard List */}
-      <div className="bg-white rounded-[32px] p-6 border-4 border-[#B2BEC3] shadow-[8px_8px_0px_0px_#B2BEC3] space-y-4 max-w-2xl mx-auto">
-        <h3 className="text-sm font-black text-[#2D3436] uppercase tracking-wider border-b-2 border-[#F1F2F6] pb-3">
+      <div className="bg-white rounded-[32px] p-6 border-4 border-mist shadow-[8px_8px_0_0_var(--color-mist)] space-y-4 max-w-2xl mx-auto">
+        <h3 className="text-sm font-black text-ink uppercase tracking-wider border-b-2 border-cloud pb-3">
           Full Class Rankings
         </h3>
 
@@ -110,16 +108,16 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
           {sortedPlayers.map((student, idx) => (
             <div
               key={student.id}
-              className="p-3.5 rounded-2xl border-2 border-[#2D3436] bg-[#FFF9F0] flex items-center justify-between shadow-[2px_2px_0px_0px_#2D3436]"
+              className="p-3.5 rounded-2xl border-2 border-ink bg-cream flex items-center justify-between shadow-[2px_2px_0_0_var(--color-ink)]"
             >
               <div className="flex items-center gap-3">
-                <span className="w-7 h-7 rounded-lg bg-[#FFD93D] border border-[#2D3436] text-[#2D3436] font-black text-xs flex items-center justify-center">
+                <span className="w-7 h-7 rounded-lg bg-sun border border-ink text-ink font-black text-xs flex items-center justify-center">
                   #{idx + 1}
                 </span>
-                <span className="font-black text-sm text-[#2D3436]">{student.name}</span>
+                <span className="font-black text-sm text-ink">{student.name}</span>
               </div>
 
-              <span className="font-mono font-black text-sm text-[#2D3436]">
+              <span className="font-mono font-black text-sm text-ink">
                 {student.score} pts
               </span>
             </div>
@@ -134,7 +132,7 @@ export const TeacherFinalLeaderboard: React.FC<Props> = ({ room, onRestartNewGam
             soundEffects.playClick();
             onRestartNewGame();
           }}
-          className="px-8 py-4 bg-[#00B894] hover:bg-[#009475] text-white font-black rounded-2xl border-2 border-[#2D3436] shadow-[4px_4px_0px_0px_#006241] text-base inline-flex items-center gap-2 transform active:scale-95 transition-all cursor-pointer"
+          className="px-8 py-4 bg-mint hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-pine)] text-ink font-black rounded-2xl border-2 border-ink shadow-[4px_4px_0_0_var(--color-pine)] text-base inline-flex items-center gap-2 transform active:scale-95 transition-all"
         >
           <RefreshCw className="w-5 h-5" />
           <span>Host Another Game Session</span>

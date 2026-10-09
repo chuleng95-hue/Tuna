@@ -17,7 +17,7 @@ import { socket } from './services/socket';
 import { PublicGameRoom, RoundResultPayload, StatementChoice } from './types';
 import { soundEffects } from './utils/audio';
 
-import { ShieldCheck, Users, Gamepad2, Sparkles, ArrowRight, BookOpen, Smartphone, Laptop } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Smartphone, Laptop } from 'lucide-react';
 
 export default function App() {
   const [role, setRole] = useState<'chooser' | 'teacher' | 'student'>('chooser');
@@ -226,7 +226,7 @@ export default function App() {
   const myPlayer = room?.players.find((p) => p.id === studentId || p.name === studentName);
 
   return (
-    <div className="min-h-screen bg-[#FFF9F0] font-sans text-[#2D3436] flex flex-col selection:bg-[#FFD93D] selection:text-[#2D3436]">
+    <div className="min-h-screen bg-cream font-sans text-ink flex flex-col">
       {/* Navigation Header */}
       <Navbar
         role={role}
@@ -243,75 +243,74 @@ export default function App() {
         {role === 'chooser' && (
           <div className="max-w-3xl mx-auto my-auto w-full space-y-8 animate-in fade-in duration-300">
             {/* Hero Header */}
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#FFD93D] text-[#2D3436] border-2 border-[#2D3436] rounded-full text-xs font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_#2D3436]">
-                <Sparkles className="w-4 h-4 text-[#E17055]" /> Real-Time Icebreaker Game
-              </div>
-              <h1 className="text-4xl md:text-6xl font-black text-[#2D3436] tracking-tight">
-                TRUTH <span className="text-[#00B894]">&</span> LIE 🤥
+            <div className="text-center space-y-4">
+              <h1 className="text-5xl md:text-7xl font-extrabold text-ink tracking-[-0.03em] leading-[0.95]">
+                TRUTH <span className="text-mint-deep">&</span> LIE
               </h1>
-              <p className="text-base md:text-lg font-bold text-[#636E72] max-w-lg mx-auto">
-                The interactive classroom game where students submit secret statements and vote live on device screens!
+              <p className="text-base md:text-lg font-semibold text-muted max-w-lg mx-auto">
+                A real-time icebreaker for your classroom. Students write two truths and a lie, then everyone votes live from their own device.
               </p>
             </div>
 
             {/* Role Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Student Role Card */}
-              <div
+              <button
+                type="button"
                 onClick={() => {
                   soundEffects.playClick();
                   setRole('student');
                 }}
-                className="group cursor-pointer bg-white hover:bg-[#81ECEC]/20 rounded-[32px] p-6 md:p-8 border-4 border-[#00CEC9] shadow-[8px_8px_0px_0px_#00CEC9] transition-all duration-200 flex flex-col justify-between space-y-6 transform hover:-translate-y-1"
+                className="group text-left bg-white hover:bg-aqua/20 rounded-[32px] p-6 md:p-8 border-4 border-teal shadow-[8px_8px_0_0_var(--color-teal)] transition-all duration-200 flex flex-col justify-between space-y-6 transform hover:-translate-y-1"
               >
                 <div className="space-y-4">
-                  <div className="w-16 h-16 bg-[#81ECEC] text-[#2D3436] border-2 border-[#00CEC9] rounded-2xl flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform shadow-[3px_3px_0px_0px_#00CEC9]">
-                    <Smartphone className="w-8 h-8 text-[#00B894]" />
+                  <div className="w-16 h-16 bg-aqua text-ink border-2 border-teal rounded-2xl flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform shadow-[3px_3px_0_0_var(--color-teal)]">
+                    <Smartphone className="w-8 h-8 text-pine" aria-hidden="true" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-[#2D3436]">
+                    <h2 className="text-2xl font-extrabold text-ink">
                       Join as Student
                     </h2>
-                    <p className="text-xs font-bold text-[#636E72] mt-1 leading-relaxed">
+                    <p className="text-sm font-semibold text-muted mt-1 leading-relaxed">
                       Enter the Game PIN, submit your 3 statements, and guess your classmates' lies in real time!
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t-2 border-[#81ECEC] flex items-center justify-between text-[#00B894] font-black text-sm">
+                <div className="pt-4 border-t-2 border-aqua flex items-center justify-between text-pine font-black text-sm">
                   <span>Join Game Session</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </div>
-              </div>
+              </button>
 
               {/* Teacher / Host Role Card */}
-              <div
+              <button
+                type="button"
                 onClick={handleTeacherAccessAttempt}
-                className="group cursor-pointer bg-white hover:bg-[#FAB1A0]/20 text-[#2D3436] rounded-[32px] p-6 md:p-8 border-4 border-[#E17055] shadow-[8px_8px_0px_0px_#E17055] transition-all duration-200 flex flex-col justify-between space-y-6 transform hover:-translate-y-1"
+                className="group text-left bg-white hover:bg-peach/20 text-ink rounded-[32px] p-6 md:p-8 border-4 border-coral shadow-[8px_8px_0_0_var(--color-coral)] transition-all duration-200 flex flex-col justify-between space-y-6 transform hover:-translate-y-1"
               >
                 <div className="space-y-4">
-                  <div className="w-16 h-16 bg-[#FAB1A0] text-[#2D3436] border-2 border-[#E17055] rounded-2xl flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform shadow-[3px_3px_0px_0px_#E17055]">
-                    <Laptop className="w-8 h-8 text-[#D63031]" />
+                  <div className="w-16 h-16 bg-peach text-ink border-2 border-coral rounded-2xl flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform shadow-[3px_3px_0_0_var(--color-coral)]">
+                    <Laptop className="w-8 h-8 text-cherry" aria-hidden="true" />
                   </div>
                   <div>
-                    <div className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-[#D63031] bg-[#FAB1A0]/50 border border-[#E17055] px-2.5 py-0.5 rounded-full mb-1">
-                      <ShieldCheck className="w-3.5 h-3.5" /> Password Protected
-                    </div>
-                    <h2 className="text-2xl font-black text-[#2D3436]">
+                    <h2 className="text-2xl font-extrabold text-ink">
                       Host as Teacher
                     </h2>
-                    <p className="text-xs text-[#636E72] mt-1 leading-relaxed">
+                    <p className="text-sm font-semibold text-muted mt-1 leading-relaxed">
                       Create a room, project the live statements screen, manage rounds, and reveal answers with confetti!
+                    </p>
+                    <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-cherry">
+                      <ShieldCheck className="w-4 h-4" aria-hidden="true" /> Requires the teacher password
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t-2 border-[#FAB1A0] flex items-center justify-between text-[#E17055] font-black text-sm">
+                <div className="pt-4 border-t-2 border-peach flex items-center justify-between text-cherry font-black text-sm">
                   <span>Teacher Control Center</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         )}

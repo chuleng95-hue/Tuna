@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Triangle, Diamond, Circle, CheckCircle2, Lock, Flame, AlertCircle } from 'lucide-react';
+import { Check, Lock, Flame, AlertCircle, VenetianMask } from 'lucide-react';
 import { RoundData, StatementChoice } from '../../types';
 import { soundEffects } from '../../utils/audio';
 
@@ -37,28 +37,28 @@ export const StudentVotingScreen: React.FC<Props> = ({
   if (isMyTurn) {
     return (
       <div className="max-w-md mx-auto my-auto p-4 w-full">
-        <div className="bg-white rounded-[32px] p-6 md:p-8 border-4 border-[#FFD93D] shadow-[8px_8px_0px_0px_#2D3436] text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
-          <div className="w-20 h-20 bg-[#FFD93D] border-4 border-[#2D3436] rounded-full flex items-center justify-center text-4xl mx-auto shadow-[4px_4px_0px_0px_#2D3436]">
-            🤫
+        <div className="bg-white rounded-[32px] p-6 md:p-8 border-4 border-sun shadow-[8px_8px_0_0_var(--color-ink)] text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-20 h-20 bg-sun border-4 border-ink rounded-full flex items-center justify-center text-ink mx-auto shadow-[4px_4px_0_0_var(--color-ink)]">
+            <VenetianMask className="w-9 h-9" aria-hidden="true" />
           </div>
 
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FFD93D] text-[#2D3436] border border-[#2D3436] rounded-full text-xs font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_#2D3436]">
-              <Flame className="w-4 h-4 text-[#E17055] fill-[#E17055]" /> It's Your Turn!
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-sun text-ink border border-ink rounded-full text-xs font-black uppercase tracking-wider shadow-[2px_2px_0_0_var(--color-ink)]">
+              <Flame className="w-4 h-4 text-coral fill-coral" /> It's Your Turn!
             </div>
-            <h2 className="text-2xl font-black text-[#2D3436] tracking-tight">
+            <h2 className="text-2xl font-black text-ink tracking-tight">
               Class is Guessing YOUR Lie!
             </h2>
-            <p className="text-xs font-bold text-[#636E72] max-w-xs mx-auto">
+            <p className="text-xs font-bold text-muted max-w-xs mx-auto">
               Stay quiet and keep a poker face! You'll earn bonus points for every classmate who guesses wrong!
             </p>
           </div>
 
-          <div className="p-4 bg-[#FFF9F0] border-2 border-[#2D3436] rounded-2xl shadow-[3px_3px_0px_0px_#2D3436]">
-            <span className="block text-xs font-black text-[#2D3436] uppercase">
+          <div className="p-4 bg-cream border-2 border-ink rounded-2xl shadow-[3px_3px_0_0_var(--color-ink)]">
+            <span className="block text-xs font-black text-ink uppercase">
               Live Votes Incoming
             </span>
-            <span className="block text-2xl font-black font-mono text-[#6C5CE7] mt-1">
+            <span className="block text-2xl font-black font-mono text-grape mt-1">
               {Object.keys(round.votes).length} Classmates Voted
             </span>
           </div>
@@ -70,31 +70,32 @@ export const StudentVotingScreen: React.FC<Props> = ({
   return (
     <div className="max-w-xl mx-auto my-auto p-4 w-full space-y-4">
       {/* Header Banner */}
-      <div className="bg-white text-[#2D3436] rounded-[32px] p-5 border-4 border-[#6C5CE7] shadow-[6px_6px_0px_0px_#6C5CE7] text-center space-y-1">
-        <span className="text-xs font-black text-[#E17055] uppercase tracking-widest">
-          Which One Is The Lie? 🤥
-        </span>
-        <h2 className="text-xl md:text-2xl font-black text-[#2D3436]">
+      <div className="bg-white text-ink rounded-[32px] p-5 border-4 border-grape shadow-[6px_6px_0_0_var(--color-grape)] text-center space-y-1">
+        <h2 className="text-xl md:text-2xl font-extrabold text-ink">
           {round.presenterName}'s Statements
         </h2>
+        <p className="text-sm font-black text-cherry">
+          Which one is the lie? Tap to vote.
+        </p>
       </div>
 
       {hasVoted || selectedChoice ? (
         /* Voted Locked In Screen */
-        <div className="bg-white rounded-[32px] p-6 border-4 border-[#00B894] shadow-[8px_8px_0px_0px_#00B894] text-center space-y-4 animate-in zoom-in-95 duration-200">
-          <div className="w-16 h-16 bg-[#81ECEC] border-4 border-[#00CEC9] text-[#2D3436] rounded-full flex items-center justify-center mx-auto shadow-[3px_3px_0px_0px_#2D3436]">
+        <div className="bg-white rounded-[32px] p-6 border-4 border-mint shadow-[8px_8px_0_0_var(--color-mint)] text-center space-y-4 animate-in zoom-in-95 duration-200">
+          <div className="w-16 h-16 bg-aqua border-4 border-teal text-ink rounded-full flex items-center justify-center mx-auto shadow-[3px_3px_0_0_var(--color-ink)]">
             <Lock className="w-8 h-8" />
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-xl font-black text-[#2D3436]">Vote Locked In!</h3>
-            <p className="text-xs font-bold text-[#636E72]">
-              You selected <span className="text-[#6C5CE7] font-black">Statement {selectedChoice}</span> as the lie.
+            <h3 className="text-xl font-black text-ink">Vote Locked In!</h3>
+            <p className="text-xs font-bold text-muted">
+              You selected <span className="text-grape font-black">Statement {selectedChoice}</span> as the lie.
             </p>
           </div>
 
-          <div className="p-3 bg-[#81ECEC]/20 border-2 border-[#00CEC9] rounded-xl text-xs font-black text-[#2D3436]">
-            ✓ Waiting for teacher to reveal the true lie on the main screen!
+          <div className="p-3 bg-aqua/20 border-2 border-teal rounded-xl text-xs font-black text-ink">
+            <Check className="inline w-4 h-4 -mt-0.5 mr-1" strokeWidth={3} aria-hidden="true" />
+            Waiting for teacher to reveal the true lie on the main screen!
           </div>
         </div>
       ) : (
@@ -104,13 +105,13 @@ export const StudentVotingScreen: React.FC<Props> = ({
           <button
             onClick={() => handleChoiceClick('A')}
             disabled={isVoting}
-            className="w-full p-4 bg-[#81ECEC] hover:bg-[#00CEC9] active:scale-98 text-[#2D3436] rounded-2xl shadow-[6px_6px_0px_0px_#00CEC9] border-4 border-[#00CEC9] text-left transition-all flex items-center gap-3 cursor-pointer group"
+            className="w-full p-4 bg-aqua hover:bg-teal active:scale-98 text-ink rounded-2xl shadow-[6px_6px_0_0_var(--color-teal)] border-4 border-teal text-left transition-all flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-white border-2 border-[#00CEC9] font-black text-2xl text-[#00CEC9] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-white border-2 border-teal font-black text-2xl text-teal flex items-center justify-center shrink-0">
               A
             </div>
             <div className="flex-1">
-              <span className="block text-[10px] font-black uppercase tracking-wider text-[#2D3436]/70">
+              <span className="block text-[10px] font-black uppercase tracking-wider text-ink/70">
                 Statement A
               </span>
               <span className="block text-sm md:text-base font-black leading-snug">
@@ -123,13 +124,13 @@ export const StudentVotingScreen: React.FC<Props> = ({
           <button
             onClick={() => handleChoiceClick('B')}
             disabled={isVoting}
-            className="w-full p-4 bg-[#FAB1A0] hover:bg-[#E17055] active:scale-98 text-[#2D3436] rounded-2xl shadow-[6px_6px_0px_0px_#E17055] border-4 border-[#E17055] text-left transition-all flex items-center gap-3 cursor-pointer group"
+            className="w-full p-4 bg-peach hover:bg-coral active:scale-98 text-ink rounded-2xl shadow-[6px_6px_0_0_var(--color-coral)] border-4 border-coral text-left transition-all flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-white border-2 border-[#E17055] font-black text-2xl text-[#E17055] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-white border-2 border-coral font-black text-2xl text-coral flex items-center justify-center shrink-0">
               B
             </div>
             <div className="flex-1">
-              <span className="block text-[10px] font-black uppercase tracking-wider text-[#2D3436]/70">
+              <span className="block text-[10px] font-black uppercase tracking-wider text-ink/70">
                 Statement B
               </span>
               <span className="block text-sm md:text-base font-black leading-snug">
@@ -142,13 +143,13 @@ export const StudentVotingScreen: React.FC<Props> = ({
           <button
             onClick={() => handleChoiceClick('C')}
             disabled={isVoting}
-            className="w-full p-4 bg-[#74B9FF] hover:bg-[#0984E3] active:scale-98 text-[#2D3436] rounded-2xl shadow-[6px_6px_0px_0px_#0984E3] border-4 border-[#0984E3] text-left transition-all flex items-center gap-3 cursor-pointer group"
+            className="w-full p-4 bg-sky hover:bg-ocean active:scale-98 text-ink rounded-2xl shadow-[6px_6px_0_0_var(--color-ocean)] border-4 border-ocean text-left transition-all flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-white border-2 border-[#0984E3] font-black text-2xl text-[#0984E3] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-white border-2 border-ocean font-black text-2xl text-ocean flex items-center justify-center shrink-0">
               C
             </div>
             <div className="flex-1">
-              <span className="block text-[10px] font-black uppercase tracking-wider text-[#2D3436]/70">
+              <span className="block text-[10px] font-black uppercase tracking-wider text-ink/70">
                 Statement C
               </span>
               <span className="block text-sm md:text-base font-black leading-snug">
@@ -160,7 +161,7 @@ export const StudentVotingScreen: React.FC<Props> = ({
       )}
 
       {error && (
-        <div className="flex items-center gap-2 text-xs font-black text-[#D63031] bg-[#FAB1A0]/30 border-2 border-[#D63031] p-3 rounded-xl animate-shake">
+        <div role="alert" className="flex items-center gap-2 text-sm font-bold text-cherry bg-peach/30 border-2 border-cherry p-3 rounded-xl animate-shake">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>

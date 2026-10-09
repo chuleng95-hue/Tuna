@@ -54,27 +54,46 @@ export const TeacherPasswordModal: React.FC<Props> = ({ isOpen, onSuccess, onCan
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border-4 border-amber-400 p-6 md:p-8 animate-in fade-in zoom-in duration-200">
-        <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-amber-100 rounded-2xl border-2 border-amber-300 text-amber-600">
-          <ShieldCheck className="w-9 h-9" />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+      onClick={onCancel}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="teacher-access-title"
+        aria-describedby="teacher-access-desc"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onCancel();
+        }}
+        className="w-full max-w-md bg-white rounded-[32px] border-4 border-coral shadow-[8px_8px_0_0_var(--color-ink)] p-6 md:p-8 animate-in fade-in zoom-in-95 duration-200"
+      >
+        <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-peach rounded-2xl border-2 border-ink text-cherry shadow-[3px_3px_0_0_var(--color-ink)]">
+          <ShieldCheck className="w-9 h-9" aria-hidden="true" />
         </div>
 
-        <h2 className="text-2xl font-black text-center text-slate-800 tracking-tight">
+        <h2 id="teacher-access-title" className="text-2xl font-extrabold text-center text-ink tracking-tight">
           Teacher / Host Access
         </h2>
-        <p className="mt-2 text-sm text-center text-slate-600">
+        <p id="teacher-access-desc" className="mt-2 text-sm font-semibold text-center text-muted">
           Enter the teacher access password to manage the game session, present rounds, and reveal answers.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <div className="relative">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <div>
+            <label
+              htmlFor="teacher-password"
+              className="block text-xs font-black text-ink uppercase tracking-wider mb-1.5"
+            >
               Teacher Password
             </label>
             <div className="relative">
               <input
+                id="teacher-password"
                 type={showPassword ? 'text' : 'password'}
+                autoFocus
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -82,13 +101,17 @@ export const TeacherPasswordModal: React.FC<Props> = ({ isOpen, onSuccess, onCan
                 }}
                 placeholder="Enter teacher password"
                 required
-                className="w-full pl-11 pr-11 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl text-slate-800 font-bold placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white text-base tracking-wider transition-all"
+                aria-invalid={!!error}
+                aria-describedby={error ? 'teacher-password-error' : undefined}
+                className="w-full pl-11 pr-12 py-3.5 bg-cream border-2 border-ink rounded-2xl text-ink font-bold placeholder-muted focus:bg-white text-base tracking-wider shadow-[3px_3px_0_0_var(--color-ink)] transition-colors"
               />
-              <Key className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Key className="w-5 h-5 text-ink absolute left-3.5 top-1/2 -translate-y-1/2" aria-hidden="true" />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-pressed={showPassword}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl flex items-center justify-center text-muted hover:text-ink hover:bg-cloud transition-colors"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -96,8 +119,12 @@ export const TeacherPasswordModal: React.FC<Props> = ({ isOpen, onSuccess, onCan
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 p-3 rounded-xl animate-shake">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+            <div
+              id="teacher-password-error"
+              role="alert"
+              className="flex items-center gap-2 text-sm font-bold text-cherry bg-peach/30 border-2 border-cherry p-3 rounded-xl animate-shake"
+            >
+              <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
               <span>{error}</span>
             </div>
           )}
@@ -106,14 +133,14 @@ export const TeacherPasswordModal: React.FC<Props> = ({ isOpen, onSuccess, onCan
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 py-3 px-4 rounded-2xl border-2 border-slate-200 font-bold text-slate-600 hover:bg-slate-100 transition-all text-sm"
+              className="flex-1 py-3 px-4 rounded-2xl bg-white border-2 border-ink font-black text-ink hover:bg-cloud shadow-[3px_3px_0_0_var(--color-ink)] active:translate-y-0.5 active:shadow-none transition-all text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 py-3 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 active:translate-y-0.5 text-white font-extrabold shadow-lg shadow-amber-500/30 transition-all text-sm disabled:opacity-50"
+              className="flex-1 py-3 px-4 rounded-2xl bg-sun hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none text-ink font-black border-2 border-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-all text-sm disabled:opacity-50 disabled:hover:translate-y-0"
             >
               {isSubmitting ? 'Verifying...' : 'Access Host Mode'}
             </button>

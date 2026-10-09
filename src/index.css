@@ -1,9 +1,120 @@
+@import "@fontsource-variable/bricolage-grotesque";
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Design tokens. Every color in the UI comes from this palette so the
+ * classroom-game look stays consistent across student and teacher screens.
+ */
+@theme {
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  --color-ink: #2D3436;
+  --color-muted: #636E72;
+  --color-mist: #B2BEC3;
+  --color-cloud: #F1F2F6;
+  --color-cream: #FFF9F0;
+
+  --color-sun: #FFD93D;
+  --color-honey: #FDCB6E;
+  --color-coral: #E17055;
+  --color-peach: #FAB1A0;
+  --color-blush: #FF7675;
+  --color-cherry: #D63031;
+
+  --color-aqua: #81ECEC;
+  --color-teal: #00CEC9;
+  --color-mint: #00B894;
+  --color-mint-deep: #009475;
+  --color-pine: #006241;
+
+  --color-sky: #74B9FF;
+  --color-ocean: #0984E3;
+
+  --color-lilac: #A29BFE;
+  --color-lilac-deep: #8C83FC;
+  --color-grape: #6C5CE7;
+  --color-grape-deep: #5B4BC4;
+
+  --animate-shake: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-float: float 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+
+  @keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+}
 
 @layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-mist) var(--color-cream);
+  }
+
   body {
-    background-color: #FFF9F0;
-    color: #2D3436;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    caret-color: var(--color-grape);
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-sun);
+    color: var(--color-ink);
+  }
+
+  /* PINs, scores and vote counts should not jitter as numbers change. */
+  .font-mono,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  /* One visible, on-brand focus ring for keyboard users everywhere. */
+  :focus-visible {
+    outline: 3px solid var(--color-grape);
+    outline-offset: 3px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

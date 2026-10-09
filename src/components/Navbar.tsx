@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Rocket, Sparkles, LogOut, ShieldCheck, User } from 'lucide-react';
+import { Volume2, VolumeX, Rocket, LogOut, ShieldCheck, User, Star } from 'lucide-react';
 import { soundEffects } from '../utils/audio';
 
 interface Props {
@@ -30,21 +30,21 @@ export const Navbar: React.FC<Props> = ({
   };
 
   return (
-    <header className="w-full bg-white border-b-4 border-[#FFD93D] sticky top-0 z-40 px-4 py-3 shadow-sm">
+    <header className="w-full bg-white border-b-4 border-sun sticky top-0 z-40 px-4 py-3 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         {/* Logo / Brand */}
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 bg-[#FF7675] border-2 border-[#2D3436] rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-[3px_3px_0px_0px_#D63031] shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <div aria-hidden="true" className="w-11 h-11 bg-blush border-2 border-ink rounded-xl flex items-center justify-center text-ink font-black text-2xl shadow-[3px_3px_0_0_var(--color-cherry)] shrink-0">
             ?
           </div>
-          <div>
-            <h1 className="text-lg md:text-2xl font-black text-[#2D3436] tracking-tight flex items-center gap-1.5">
-              <span>TRUTH <span className="text-[#00B894]">&</span> LIE</span>
-              <span className="hidden sm:inline-block text-[10px] uppercase font-black tracking-wider bg-[#FFD93D] text-[#2D3436] border border-[#2D3436] px-2.5 py-0.5 rounded-full">
+          <div className={pin ? 'hidden sm:block' : undefined}>
+            <h1 className="text-lg md:text-2xl font-black text-ink tracking-tight flex items-center gap-1.5">
+              <span>TRUTH <span className="text-mint-deep">&</span> LIE</span>
+              <span className="hidden sm:inline-block text-[10px] uppercase font-black tracking-wider bg-sun text-ink border border-ink px-2.5 py-0.5 rounded-full">
                 CLASSROOM
               </span>
             </h1>
-            <p className="text-[11px] font-extrabold text-[#636E72] hidden sm:block">
+            <p className="text-[11px] font-extrabold text-muted hidden sm:block">
               Interactive Real-Time Icebreaker Game
             </p>
           </div>
@@ -52,35 +52,36 @@ export const Navbar: React.FC<Props> = ({
 
         {/* Center Badge: PIN / Student Status */}
         {pin && (
-          <div className="flex items-center gap-2 bg-[#FDCB6E] border-2 border-[#E17055] px-4 py-1.5 rounded-full shadow-[2px_2px_0px_0px_#2D3436]">
+          <div className="flex items-center gap-2 bg-honey border-2 border-coral px-3 sm:px-4 py-1.5 rounded-full min-w-0 shadow-[2px_2px_0_0_var(--color-ink)]">
             <div className="text-center flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-wider text-[#2D3436]/80">
+              <span className="text-xs font-black uppercase tracking-wider text-ink/80">
                 PIN:
               </span>
-              <span className="font-mono text-base md:text-lg font-black text-[#2D3436] tracking-widest select-all">
+              <span className="font-mono text-base md:text-lg font-black text-ink tracking-widest select-all">
                 {pin}
               </span>
             </div>
 
             {role === 'student' && studentName && (
-              <div className="pl-3 border-l-2 border-[#E17055] flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-[#81ECEC] border border-[#00CEC9] flex items-center justify-center text-[#2D3436]">
+              <div className="pl-3 border-l border-ink/30 hidden sm:flex items-center gap-2">
+                <div aria-hidden="true" className="w-7 h-7 rounded-full bg-aqua border border-teal flex items-center justify-center text-ink">
                   <User className="w-4 h-4" />
                 </div>
-                <div className="hidden xs:block">
-                  <span className="block text-xs font-black text-[#2D3436] max-w-[100px] truncate">
+                <div className="hidden sm:block">
+                  <span className="block text-xs font-black text-ink max-w-[100px] truncate">
                     {studentName}
                   </span>
-                  <span className="block text-[10px] font-black text-[#006241]">
-                    ⭐ {score} pts
+                  <span className="block text-[10px] font-black text-pine">
+                    <Star className="inline w-3 h-3 -mt-0.5 mr-0.5 fill-current" aria-hidden="true" />
+                    <span data-numeric>{score}</span> pts
                   </span>
                 </div>
               </div>
             )}
 
             {role === 'teacher' && (
-              <div className="pl-3 border-l-2 border-[#E17055] hidden md:flex items-center gap-1 text-xs font-black text-[#2D3436] bg-white/60 px-2 py-0.5 rounded-full">
-                <ShieldCheck className="w-4 h-4 text-[#00B894]" />
+              <div className="pl-3 border-l border-ink/30 hidden md:flex items-center gap-1 text-xs font-black text-ink bg-white/60 px-2 py-0.5 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-pine" aria-hidden="true" />
                 <span>TEACHER MODE</span>
               </div>
             )}
@@ -91,25 +92,28 @@ export const Navbar: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={toggleSound}
-            title={soundOn ? 'Mute Sounds' : 'Unmute Sounds'}
-            className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white hover:bg-[#F1F2F6] text-[#2D3436] flex items-center justify-center transition-all border-2 border-[#2D3436] shadow-[2px_2px_0px_0px_#2D3436] cursor-pointer"
+            title={soundOn ? 'Mute sounds' : 'Unmute sounds'}
+            aria-label={soundOn ? 'Mute sounds' : 'Unmute sounds'}
+            aria-pressed={!soundOn}
+            className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white hover:bg-cloud text-ink flex items-center justify-center transition-all border-2 border-ink shadow-[2px_2px_0_0_var(--color-ink)]"
           >
-            {soundOn ? <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-[#00B894]" /> : <VolumeX className="w-4 h-4 md:w-5 md:h-5 text-[#636E72]" />}
+            {soundOn ? <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-mint-deep" /> : <VolumeX className="w-4 h-4 md:w-5 md:h-5 text-muted" />}
           </button>
 
           <button
             onClick={onOpenDeployGuide}
-            className="px-3 py-2 md:px-4 md:py-2 rounded-xl bg-[#6C5CE7] hover:bg-[#5b4bc4] text-white text-xs font-black flex items-center gap-1.5 shadow-[2px_2px_0px_0px_#2D3436] border-2 border-[#2D3436] transition-all shrink-0 cursor-pointer"
+            className="px-3 py-2 md:px-4 md:py-2 rounded-xl bg-grape hover:bg-grape-deep text-white text-xs font-black flex items-center gap-1.5 shadow-[2px_2px_0_0_var(--color-ink)] border-2 border-ink transition-all shrink-0"
           >
             <Rocket className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Share / Deploy</span>
+            <span className="sr-only sm:not-sr-only">Share / Deploy</span>
           </button>
 
           {role !== 'chooser' && (
             <button
               onClick={onExit}
-              title="Exit Game"
-              className="p-2 md:px-3 md:py-2 rounded-xl bg-[#FF7675] hover:bg-[#D63031] text-white text-xs font-black flex items-center gap-1 shadow-[2px_2px_0px_0px_#2D3436] border-2 border-[#2D3436] transition-all shrink-0 cursor-pointer"
+              title="Leave game"
+              aria-label="Leave game"
+              className="p-2 md:px-3 md:py-2 rounded-xl bg-blush hover:bg-peach text-ink text-xs font-black flex items-center gap-1 shadow-[2px_2px_0_0_var(--color-ink)] border-2 border-ink transition-all shrink-0"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="hidden md:inline">Leave</span>
